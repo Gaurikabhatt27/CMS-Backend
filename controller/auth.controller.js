@@ -2,7 +2,7 @@ import {
   initiateSignupService,
   verifySignupOtpService,
   loginService
-} from "../services/auth.service.js";
+} from "../service/auth.service.js";
 
 /**
  * POST /auth/signup/initiate

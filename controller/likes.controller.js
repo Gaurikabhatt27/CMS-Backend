@@ -1,7 +1,7 @@
 import {
   toggleLikeService,
   getLikeCountService
-} from "../services/likes.service.js";
+} from "../service/likes.service.js";
 
 export const toggleLike = async (req, res) => {
   try {

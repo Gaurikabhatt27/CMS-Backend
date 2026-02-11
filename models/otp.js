@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
-const otpSchema = new new mongoose.Schema(
+const otpSchema = new mongoose.Schema(
     {
         email: {
             type: String,
@@ -18,8 +18,8 @@ const otpSchema = new new mongoose.Schema(
     {timestamps: true}
 );
 
-otpSchema.pre("save", async function (next){
-    if(!this.isModified("otp")) return next();
+otpSchema.pre("save", async function (){
+    if(!this.isModified("otp")) return;
 
     const saltRounds = 10;
     this.otp = await bcrypt.hash(this.otp, saltRounds);
