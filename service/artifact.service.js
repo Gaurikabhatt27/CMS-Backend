@@ -2,7 +2,6 @@ import Artifact from "../models/artifact.js";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 
-// ✅ Create a new artifact
 export const createArtifactService = async ({
     title,
     content,
@@ -18,7 +17,6 @@ export const createArtifactService = async ({
 
         let mediaUrl = null;
 
-        // ✅ Upload to Cloudinary if file exists
         if (filePath) {
 
             const uploadResult = await cloudinary.uploader.upload(
@@ -30,7 +28,6 @@ export const createArtifactService = async ({
 
             mediaUrl = uploadResult.secure_url;
 
-            // ✅ Delete local file after upload
             if (fs.existsSync(filePath)) {
                 fs.unlinkSync(filePath);
             }
@@ -38,7 +35,6 @@ export const createArtifactService = async ({
             console.log("Media uploaded:", mediaUrl);
         }
 
-        // ✅ Create artifact in DB
         const artifact = await Artifact.create({
             title,
             content,
@@ -59,7 +55,6 @@ export const createArtifactService = async ({
 };
 
 
-// ✅ Get artifacts
 export const getArtifactsService = async ({ userId, role }) => {
 
     try {

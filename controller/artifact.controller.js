@@ -1,14 +1,14 @@
+import rateLimit from "express-rate-limit";
 import { createArtifactService ,getArtifactsService} from "../service/artifact.service.js";
+import { apiLimiter } from "../middleware/rateLimiter.middleware.js";
 
-/**
- * POST /artifacts
- */
+
 export const createArtifact = async (req, res) => {
   try {
     const artifact = await createArtifactService({
       title: req.body.title,
       content: req.body.content,
-      userId: req.user.id // injected by auth middleware
+      userId: req.user.id 
     });
 
     res.status(201).json({

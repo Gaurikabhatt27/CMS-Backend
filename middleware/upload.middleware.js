@@ -1,17 +1,15 @@
 import multer from "multer";
 import path from "path";
 
-// Set up storage engine for multer
 const storage = multer.diskStorage({
-    // cb : callback function to specify the destination and filename for uploaded files
   destination: function (req, file, cb) {
-    cb(null, "uploads/"); // Directory to save uploaded files
+    cb(null, "uploads/"); 
     },
 
     filename: (req, file, cb) => {
         const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1E9);
 
-        cb(null, uniqueName + path.extname(file.originalname)); // Save file with unique name and original extension
+        cb(null, uniqueName + path.extname(file.originalname)); 
     }
 });
 
@@ -20,20 +18,20 @@ const storage = multer.diskStorage({
 const fileFilter = (req, file, cb) => {
 
     if(
-        file.mimetype.startsWith("image/") || // Accept image files
-        file.mimetype === "application/pdf" // Accept PDF files
+        file.mimetype.startsWith("image/") || 
+        file.mimetype === "application/pdf" 
     ){
-        cb(null, true); // Accept the file
+        cb(null, true); 
     } else {
-        cb(new Error("Only image and PDF files are allowed"), false); // Reject unsupported file types
+        cb(new Error("Only image and PDF files are allowed"), false); 
     }
     
 };
 
-// Export multer instance with defined storage and file filter
+// Export multer instance 
 
 export const upload = multer({
     storage: storage,
     fileFilter: fileFilter,
-    limits: { fileSize: 5 * 1024 * 1024 } // Limit file size to 5MB
+    limits: { fileSize: 5 * 1024 * 1024 } 
 });
